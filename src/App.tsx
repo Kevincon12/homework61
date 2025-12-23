@@ -8,9 +8,19 @@ const App = () => {
 
     useEffect(() => {
         const loadCountries = async () => {
-            const req = await fetch(COUNTRIES_URL);
-            const reqInJson = await req.json();
-            setCountries(reqInJson);
+            try {
+                const response = await fetch(COUNTRIES_URL);
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка запроса: ${response.status} ${response.statusText}`)
+                }
+                const resInJson = await response.json();
+                setCountries(resInJson);
+
+            } catch (error) {
+                console.error('Не удалось загрузить страны:', error)
+                alert('Произошла ошибка при загрузке стран. Попробуйте позже.')
+            }
         }
         loadCountries();
     }, []);
