@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import './App.css'
 import Sidebar from "./components/Sidebar/Sidebar.tsx";
+import axios from "axios";
 
 const App = () => {
     const [countries, setCountries] = useState<Country[]>([]);
@@ -9,13 +10,8 @@ const App = () => {
     useEffect(() => {
         const loadCountries = async () => {
             try {
-                const response = await fetch(COUNTRIES_URL);
-
-                if (!response.ok) {
-                    throw new Error(`Ошибка запроса: ${response.status} ${response.statusText}`)
-                }
-                const resInJson = await response.json();
-                setCountries(resInJson);
+                const response = await axios(COUNTRIES_URL);
+                setCountries(response.data);
 
             } catch (error) {
                 console.error('Не удалось загрузить страны:', error)
