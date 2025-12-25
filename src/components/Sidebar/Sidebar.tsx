@@ -7,8 +7,8 @@ interface Props {
 
 const Sidebar: React.FC<Props> = ({countries}) => {
     return (
-        <div className='col-4'>
-            <h1 className='card-title'>Список всех стран</h1>
+        <div>
+            <h1 className='card-title mb-2'>Список всех стран</h1>
 
             <div className='list-group overflow-auto' style={{maxHeight: '500px'}}>
                 {countries.map((country) => (
