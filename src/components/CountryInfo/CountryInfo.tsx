@@ -14,20 +14,18 @@ const CountryInfo: React.FC<Props> = ({id}) => {
         try {
             const response = await axios<CountryData>(`https://restcountries.com/v2/alpha/${id}`);
             const countryData = response.data;
-            setCountry(countryData);
+
             const newCountryData: CountryData = {
-                name: countryData.name,
+                countryName: countryData.name,
                 capital: countryData.capital,
                 population: countryData.population,
                 borders: countryData.borders,
             }
+            setCountry(newCountryData);
 
-            console.log(newCountryData);
         } catch (e) {
             console.error(e);
         }
-
-
 
     }, [id]);
 
@@ -38,9 +36,17 @@ const CountryInfo: React.FC<Props> = ({id}) => {
 
     return (
         <div>
-            инфа о стране
+            {country && (
+                <>
+                    <h1 className='card-title mp-1'>Country: {country.countryName}</h1>
+                    <p className='card-body'>Capital: {country.capital}</p>
+                    <p className='card-body'>Population: {country.population}</p>
+                    <span className='card-text'>Borders: {country.borders}</span>
+                </>
+            )}
         </div>
     );
 };
 
-export default CountryInfo;
+
+export default CountryInfo

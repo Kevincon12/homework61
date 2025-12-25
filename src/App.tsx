@@ -34,7 +34,7 @@ const App = () => {
             <div className='col-3'>
                 <Sidebar countries={countries} onBtnClick={selectCountry}/>
             </div>
-            <div className='col-9'>
+            <div className='col-9 p-2 border border-dark rounded mt-3'>
                 <CountryInfo id={selectedCountryCode}/>
             </div>
         </div>
