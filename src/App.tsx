@@ -24,14 +24,18 @@ const App = () => {
         loadCountries();
     }, []);
 
+    const selectCountry = (code: string) => {
+        setSelectedCountryCode(code);
+    };
+
   return (
     <div className='container'>
         <div className='row'>
             <div className='col-3'>
-                <Sidebar countries={countries}/>
+                <Sidebar countries={countries} onBtnClick={selectCountry}/>
             </div>
             <div className='col-9'>
-                <CountryInfo/>
+                <CountryInfo id={selectedCountryCode}/>
             </div>
         </div>
 
